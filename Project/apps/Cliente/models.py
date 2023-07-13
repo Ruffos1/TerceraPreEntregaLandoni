@@ -7,7 +7,11 @@ class Pais(models.Model):
     def __str__(self):
         return self.nombre
 
-    
+
+class Suscripcion(models.Model):
+    plan_suscripcion = models.CharField(max_length=100)
+    def __str__(self) -> str:
+        return self.plan_suscripcion
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
@@ -15,6 +19,7 @@ class Cliente(models.Model):
     nacimiento = models.DateField(null=True)
     "Este NULL=TRUE sirve para saber que este dato es opcional"
     pais_origen_id = models.ForeignKey(Pais, on_delete=models.SET_NULL, null=True, blank=True)
+    plan_suscripcion = models.ForeignKey(Suscripcion, on_delete=models.SET_NULL, null=True)
     "Este es un tipo de ato FK, lo recibiria como lo quisimos en su modelo local, Y el on delete sirve que para cuando esta FK se borre en su formato local nos salte Null el cliente a lque se le atribuyo"
     def __str__(self):
         return f"{self.nombre } {self.apellido}"

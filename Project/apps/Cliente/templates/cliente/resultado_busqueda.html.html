@@ -1,0 +1,17 @@
+{% extends "Home/base.html" %}
+{% block TITULO %}
+Estos son los Clientes que buscabas
+  
+{% endblock TITULO %}
+{% block CONTENIDO %}
+{% for cliente in resultado %}
+  <p>{{ cliente.nombre }} {{ cliente.apellido }}</p>
+  <p>Fecha de nacimiento: {{ cliente.nacimiento }}</p>
+  <p>País: {{ cliente.pais_origen_id }}</p>
+  <p>Suscripción: {{ cliente.plan_suscripcion }}</p>
+  <hr>
+{% empty %}
+  <p>No se encontraron clientes.</p>
+{% endfor %}
+  
+{% endblock CONTENIDO %}
