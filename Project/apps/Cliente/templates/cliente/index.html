@@ -1,0 +1,15 @@
+{% extends "Home/Base.html" %}
+
+{% block TITULO %}
+Estos son Mis Clientes
+{% endblock TITULO %}
+{% block CONTENIDO %}
+<ul>
+    {% for cliente in Clientes %}
+    <h2>{{cliente.nombre}} {{cliente.apellido}}</h4>
+    <li style="list-style: none; font-size: larger;">{{cliente.nacimiento}}</li>
+    <li style="list-style: none; color: brown;">{{cliente.pais_origen_id}}</li>
+    {% endfor %}
+</ul>
+<a href="{% url "Home:home" %}">Volver al Inicio</a>
+{% endblock CONTENIDO %}

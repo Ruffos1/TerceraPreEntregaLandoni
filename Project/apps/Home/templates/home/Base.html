@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="text-align: center; padding-bottom: 1.5rem;padding-top: 1.2rem;">
+      <h1 style="color:antiquewhite;font-size: 24px;font-weight: bold;text-align: center;text-transform: uppercase;background-color: #006dbb;padding: 10px;box-sizing: border-box;transform: scale(1.2);display: inline;border-radius: 10px;">
+        {%  block TITULO %}
+         Bienvenido a mi proyecto de Django
+        {% endblock TITULO %}
+      </h1>
+    </div>
+     <div>
+     {% block CONTENIDO %}
+             
+     {% endblock CONTENIDO %}
+     </div>
+</body>
+</html>

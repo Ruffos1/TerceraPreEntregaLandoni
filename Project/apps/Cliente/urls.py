@@ -1,6 +1,8 @@
-from django.contrib import admin
 from django.urls import path
+from .views import index
+
+app_name = "Cliente"
 
 urlpatterns = [
-    path('', admin.site.urls),
+    path('',index, name="clientes" ),
 ]
