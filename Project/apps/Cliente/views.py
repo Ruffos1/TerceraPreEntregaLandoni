@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from datetime import date
-from.models import Cliente
-from .forms import ClienteForm
+from .models import Cliente
+from .forms import ClienteForm, BusquedaForm
 
 # Create your views here.
 def index(request):
@@ -23,24 +23,11 @@ def crear_cliente(request):
 
     return render(request, "cliente/crear_clientes.html", context= {"form": form})
 
-def Busqueda(request : HttpRequest) -> HttpResponse:
-    if request.method == "POST":
-        form = ClienteForm(request.POST)
-        if form.is_valid():
-            nombre = form.cleaned_data["nombre"]
-            apellido = form.cleaned_data["apellido"]
-            nacimiento = form.cleaned_data["nacimiento"]
-            pais_origen_id = form.cleaned_data["pais_origen_id"]
-            plan_suscripcion = form.cleaned_data["plan_suscripcion"]
-            busqueda= Cliente.objects.filter(
-                nombre__icontains = nombre,
-                apellido__icontains = apellido,
-                nacimiento__icontains = nacimiento,
-                pais_origen_id__icontains = pais_origen_id,
-                plan_suscripcion__icontains = plan_suscripcion,
-            )
-            return render(request, "resultado_busqueda.html", {"Resultado":busqueda})
-        else:
-            form = ClienteForm()
-        return render(request, "buscar.html", {"buscar": form})
-    
+def busqueda(request: HttpRequest) -> HttpResponse:
+    nombre_cliente = request.GET.get("nombre")
+    if nombre_cliente:
+        listado_clientes = Cliente.objects.filter(nombre__icontains = nombre_cliente)
+        return render(request, "cliente/resultado_busqueda.html", {"resultado":listado_clientes})
+    else:
+        form = BusquedaForm()
+        return render(request, "cliente/buscar.html", {"buscar":form})
