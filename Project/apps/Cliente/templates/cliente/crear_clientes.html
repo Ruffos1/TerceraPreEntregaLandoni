@@ -1,0 +1,19 @@
+{% extends "Home/Base.html" %}
+
+{% block TITULO %}
+Estos son Mis Clientes
+{% endblock TITULO %}
+{% block CONTENIDO %}
+<div>
+    <form style="max-width: 400px;margin: 0 auto;" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    
+        <button style="background-color: #007bff;color: #fff;padding: 10px 20px;border: none;border-radius: 4px;  cursor: pointer;" type="submit">Guardar Usuario</button>
+
+    </form>
+</div>
+
+<a href="{% url "Home:home" %}">Volver al Inicio</a>
+<a href="{% url "Cliente:clientes" %}">Ver mis clientes ya Creados</a>
+{% endblock CONTENIDO %}

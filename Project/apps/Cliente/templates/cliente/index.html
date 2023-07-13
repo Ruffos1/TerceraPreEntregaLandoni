@@ -11,5 +11,7 @@ Estos son Mis Clientes
     <li style="list-style: none; color: brown;">{{cliente.pais_origen_id}}</li>
     {% endfor %}
 </ul>
+
+<a href="{% url "Cliente:crear_cliente" %}">Crear nuevo cliente</a>
 <a href="{% url "Home:home" %}">Volver al Inicio</a>
 {% endblock CONTENIDO %}
