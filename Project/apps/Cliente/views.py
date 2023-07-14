@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpRequest, HttpResponse
-from datetime import date
 from .models import Cliente
 from .forms import ClienteForm, BusquedaForm
 
@@ -14,20 +12,29 @@ def index(request):
 def crear_cliente(request):
     if request.method == "POST":
         form = ClienteForm(request.POST)
-        #Indiaca que esta variable debe guardarse
         if form.is_valid():
             form.save()
             return redirect("Cliente:clientes")
-    else: #request.method == "GET"
+    else:
         form = ClienteForm()
 
-    return render(request, "cliente/crear_clientes.html", context= {"form": form})
+    return render(request, "cliente/crear_clientes.html", {"form": form})
 
-def busqueda(request: HttpRequest) -> HttpResponse:
-    nombre_cliente = request.GET.get("nombre")
-    if nombre_cliente:
-        listado_clientes = Cliente.objects.filter(nombre__icontains = nombre_cliente)
-        return render(request, "cliente/resultado_busqueda.html", {"resultado":listado_clientes})
-    else:
-        form = BusquedaForm()
-        return render(request, "cliente/buscar.html", {"buscar":form})
+def busqueda(request):
+    form = BusquedaForm()
+
+    if request.method == "POST":
+        form = BusquedaForm(request.POST)
+        if form.is_valid():
+            nombre_cliente = form.cleaned_data.get("nombre")
+            return redirect("Cliente:resultados", nombre=nombre_cliente)
+
+    return render(request, "cliente/buscar.html", {"form": form})
+
+def resultados(request, nombre):
+    listado_clientes = []
+
+    if nombre:
+        listado_clientes = Cliente.objects.filter(nombre__icontains=nombre)
+
+    return render(request, "cliente/resultado_busqueda.html", {"resultado": listado_clientes})

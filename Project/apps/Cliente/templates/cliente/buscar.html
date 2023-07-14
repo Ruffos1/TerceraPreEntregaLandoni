@@ -3,10 +3,9 @@
   Busca a Tu Cliente
 {% endblock TITULO %}
 {% block CONTENIDO %}
-<form style="max-width: 400px;margin: 0 auto;", method="post">
-    {{csrf_token}}
-    {{buscar.as_p}}
-    <button style="background-color: #007bff;color: #fff;padding: 10px 20px;border: none;border-radius: 4px;  cursor: pointer;", type="submit">Buscar</button>
+<form style="max-width: 400px;margin: 0 auto;" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button style="background-color: #007bff;color: #fff;padding: 10px 20px;border: none;border-radius: 4px;  cursor: pointer;" type="submit">Buscar</button>
 </form>
-  
 {% endblock CONTENIDO %}
