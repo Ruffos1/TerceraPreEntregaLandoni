@@ -13,5 +13,7 @@ Estos son los Clientes que buscabas
 {% empty %}
   <p>No se encontraron clientes.</p>
 {% endfor %}
+
+<a href="{% url "Cliente:buscar" %}">Volver a buscar</a>
   
 {% endblock CONTENIDO %}
